@@ -231,19 +231,19 @@
 
         <!-- 3. PDKT SPARK METER -->
         <section class="glass-card rounded-3xl p-8 text-center">
-            <h2 class="font-cursive text-3xl font-bold text-rose-300 mb-2">PDKT Spark Level Meter 📈✨</h2>
-            <p class="text-xs md:text-sm text-slate-300 mb-6">Coba geser slider ini untuk mengukur seberapa sering Caca bikin aku kepikiran!</p>
+            <h2 class="font-cursive text-3xl font-bold text-rose-300 mb-2">Seberapa Kepikiran Caca ke Iky? 📈✨</h2>
+            <p class="text-xs md:text-sm text-slate-300 mb-6">Coba geser slider ini buat ngaku seberapa sering Caca mikirin Iky! 😜</p>
 
             <div class="max-w-md mx-auto">
                 <input type="range" id="sparkSlider" min="0" max="100" value="40" oninput="updateSparkMeter(this.value)" class="w-full accent-rose-400 cursor-pointer h-3 bg-white/20 rounded-lg">
                 
                 <div class="mt-6 p-4 bg-white/10 rounded-2xl border border-white/10 flex items-center justify-between">
-                    <span class="text-xs md:text-sm font-medium text-slate-300">Tingkat Efek Caca:</span>
+                    <span class="text-xs md:text-sm font-medium text-slate-300">Tingkat Kepikiran Caca:</span>
                     <span id="sparkPercentage" class="font-bold text-xl md:text-2xl text-rose-400">40%</span>
                 </div>
                 
                 <p id="sparkFeedback" class="text-xs md:text-sm text-pink-300 mt-3 font-medium h-8 flex items-center justify-center">
-                    "Awalnya penasaran aja..."
+                    "Mulai sering kebayang Iky..."
                 </p>
             </div>
         </section>
@@ -490,18 +490,21 @@
             const label = document.getElementById('sparkPercentage');
             const feedback = document.getElementById('sparkFeedback');
 
-            if (val < 30) {
+            if (val <= 25) {
                 label.innerText = val + "%";
-                feedback.innerText = "Awal kenal: Penasaran sama sosok Caca 💫";
-            } else if (val < 60) {
+                feedback.innerText = "Pura-pura cuek tapi padahal kepikiran kan? 🙈";
+            } else if (val <= 50) {
                 label.innerText = val + "%";
-                feedback.innerText = "Sering bikin tersenyum pas dapet notif chat 😊";
-            } else if (val < 90) {
+                feedback.innerText = "Mulai sering kebayang obrolan sama Iky... 😊";
+            } else if (val <= 75) {
                 label.innerText = val + "%";
-                feedback.innerText = "Selalu kepikiran & bikin hari-hari makin seru 🥰";
+                feedback.innerText = "Kangen Iky tapi gengsi mau nanya duluan 🤫❤️";
+            } else if (val < 100) {
+                label.innerText = val + "%";
+                feedback.innerText = "Bikin senyum-senyum sendiri seharian pas dapet chat! 🥰";
             } else {
-                label.innerText = "1000% Over Limit!";
-                feedback.innerText = "Caca udah bikin ketagihan ngobrol tiap hari! ✨🔥";
+                label.innerText = "1000% OVER LIMIT!";
+                feedback.innerText = "Fix kepikiran Iky terus tanpa henti! 😆🔥";
                 triggerConfetti();
             }
         }
