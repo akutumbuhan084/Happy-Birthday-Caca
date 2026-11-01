@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Caca! ✨💖</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        roseGold: '#D4AF37',
+                        blushPink: '#FFD1DC',
+                        deepRose: '#E63946',
+                        softPink: '#FFF0F5',
+                    },
+                    fontFamily: {
+                        cursive: ['"Dancing Script"', 'cursive'],
+                        sans: ['"Poppins"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e1b2e 0%, #3a1c3b 50%, #2a0825 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Glassmorphism Card Effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Floating Background Particles */
+        .heart-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatUp 7s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.6);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Flip Card Styling */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner, .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Candle Flame Animation */
+        .flame {
+            background: radial-gradient(ellipse at bottom, #fff6a5 0%, #ffaa00 60%, #ff4500 100%);
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 15px #ffaa00, 0 0 25px #ff4500;
+            animation: flicker 1.2s infinite alternate ease-in-out;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); opacity: 0.95; }
+            50% { transform: scale(1.15) rotate(2deg); opacity: 1; }
+            100% { transform: scale(0.9) rotate(-1deg); opacity: 0.85; }
+        }
+
+        /* Pulse Glow Animation */
+        .pulse-glow {
+            animation: pulseGlow 2s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(244, 63, 94, 0.4); }
+            100% { box-shadow: 0 0 35px rgba(244, 63, 94, 0.8); }
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- Floating Background Elements -->
+    <div id="hearts-container"></div>
+
+    <!-- Music Player Floating Button -->
+    <div class="fixed top-5 right-5 z-50">
+        <button id="musicToggleBtn" onclick="toggleAudio()" class="glass-card flex items-center gap-3 px-4 py-2.5 rounded-full shadow-lg hover:scale-105 transition-all text-white text-xs md:text-sm font-medium border border-rose-400/30">
+            <i id="musicIcon" class="fas fa-music text-rose-400 animate-bounce"></i>
+            <span id="musicStatusText">Putar Musik 🎵</span>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto px-4 py-8 relative z-10 flex flex-col gap-10">
+
+        <!-- 1. HERO SECTION -->
+        <section class="text-center py-12 px-6 glass-card rounded-3xl mt-4 relative overflow-hidden">
+            <div class="inline-flex items-center gap-2 bg-rose-500/20 text-rose-300 border border-rose-500/30 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 shadow-sm">
+                <span>✨ 2 November • Hari Spesial Caca</span>
+            </div>
+            
+            <h1 class="font-cursive text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-400 to-amber-200 mb-4 drop-shadow-md">
+                Happy Birthday, Caca! 🎉✨
+            </h1>
+            
+            <p class="text-slate-300 md:text-lg max-w-xl mx-auto mb-8 font-light leading-relaxed">
+                Hari ini adalah hari ulang tahun orang yang belakangan ini selalu berhasil bikin hari-hariku makin cerah dan berwarna. Selamat bertambah usia ya! 🌸
+            </p>
+
+            <!-- Live Countdown Timer -->
+            <div class="mb-8">
+                <p class="text-xs uppercase tracking-widest text-rose-300 font-semibold mb-3">Countdown Menuju Ulang Tahun Caca ⏳</p>
+                <div class="grid grid-cols-4 gap-2 md:gap-4 max-w-md mx-auto">
+                    <div class="bg-white/10 backdrop-blur p-3 rounded-2xl border border-white/10">
+                        <span id="days" class="block text-2xl md:text-3xl font-bold text-rose-400">00</span>
+                        <span class="text-[10px] md:text-xs text-slate-400 uppercase">Hari</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur p-3 rounded-2xl border border-white/10">
+                        <span id="hours" class="block text-2xl md:text-3xl font-bold text-rose-400">00</span>
+                        <span class="text-[10px] md:text-xs text-slate-400 uppercase">Jam</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur p-3 rounded-2xl border border-white/10">
+                        <span id="minutes" class="block text-2xl md:text-3xl font-bold text-rose-400">00</span>
+                        <span class="text-[10px] md:text-xs text-slate-400 uppercase">Menit</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur p-3 rounded-2xl border border-white/10">
+                        <span id="seconds" class="block text-2xl md:text-3xl font-bold text-rose-400">00</span>
+                        <span class="text-[10px] md:text-xs text-slate-400 uppercase">Detik</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="triggerConfetti(); scrollToSection('cake-section')" class="bg-gradient-to-r from-rose-500 to-pink-600 text-white font-medium px-6 py-3 rounded-full shadow-lg hover:shadow-rose-500/30 hover:scale-105 active:scale-95 transition-all flex items-center gap-2 text-sm">
+                    <i class="fas fa-birthday-cake"></i> Tiup Lilin Kue 🎂
+                </button>
+                <button onclick="scrollToSection('reasons-section')" class="bg-white/10 hover:bg-white/20 text-rose-200 border border-rose-300/30 font-medium px-6 py-3 rounded-full transition-all flex items-center gap-2 text-sm">
+                    <i class="fas fa-sparkles text-amber-300"></i> Yang Bikin Kagum ➔
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. VIRTUAL BIRTHDAY CAKE -->
+        <section id="cake-section" class="glass-card rounded-3xl p-8 text-center relative overflow-hidden">
+            <h2 class="font-cursive text-3xl md:text-4xl font-bold text-rose-300 mb-2">Make a Wish & Tiup Lilinnya 🕯️</h2>
+            <p class="text-xs md:text-sm text-slate-300 mb-8">Klik pada api lilin untuk memadamkannya dan ucapkan permohonanmu!</p>
+
+            <!-- Cake Graphics -->
+            <div class="relative w-52 h-48 mx-auto mb-6 flex flex-col items-center justify-end">
+                <!-- Candles Container -->
+                <div class="flex justify-center gap-6 mb-1 z-20">
+                    <!-- Candle 1 -->
+                    <div class="relative flex flex-col items-center cursor-pointer group" onclick="extinguishCandle(this)">
+                        <div class="flame w-3.5 h-5 mb-0.5"></div>
+                        <div class="w-3 h-10 bg-gradient-to-b from-pink-300 to-rose-400 rounded-t-sm shadow"></div>
+                    </div>
+                    <!-- Candle 2 (Center) -->
+                    <div class="relative flex flex-col items-center cursor-pointer group" onclick="extinguishCandle(this)">
+                        <div class="flame w-3.5 h-5 mb-0.5"></div>
+                        <div class="w-3 h-12 bg-gradient-to-b from-amber-200 to-amber-400 rounded-t-sm shadow"></div>
+                    </div>
+                    <!-- Candle 3 -->
+                    <div class="relative flex flex-col items-center cursor-pointer group" onclick="extinguishCandle(this)">
+                        <div class="flame w-3.5 h-5 mb-0.5"></div>
+                        <div class="w-3 h-10 bg-gradient-to-b from-pink-300 to-rose-400 rounded-t-sm shadow"></div>
+                    </div>
+                </div>
+
+                <!-- Cake Top Layer -->
+                <div class="w-40 h-10 bg-gradient-to-r from-pink-400 to-rose-400 rounded-t-2xl relative shadow-md flex items-center justify-center border-b-2 border-pink-500">
+                    <div class="absolute -top-1 w-full flex justify-around">
+                        <span class="w-4 h-3 bg-white/90 rounded-full"></span>
+                        <span class="w-4 h-3 bg-white/90 rounded-full"></span>
+                        <span class="w-4 h-3 bg-white/90 rounded-full"></span>
+                        <span class="w-4 h-3 bg-white/90 rounded-full"></span>
+                    </div>
+                    <span class="text-xs text-white font-bold tracking-widest uppercase">CACA</span>
+                </div>
+                <!-- Cake Base Layer -->
+                <div class="w-48 h-12 bg-gradient-to-r from-rose-500 to-purple-500 rounded-t-lg relative shadow-lg flex items-center justify-center border-b-4 border-rose-600">
+                    <div class="w-full h-2 bg-white/30 absolute top-2"></div>
+                </div>
+                <!-- Cake Plate -->
+                <div class="w-60 h-3 bg-slate-300/40 rounded-full shadow-md"></div>
+            </div>
+
+            <!-- Wish Result Box -->
+            <div id="wishResultMessage" class="hidden max-w-md mx-auto bg-white/10 backdrop-blur p-4 rounded-2xl border border-rose-400/40 shadow-sm animate-fade-in">
+                <p class="text-rose-300 font-semibold text-lg mb-1">✨ Wish Sent to the Universe!</p>
+                <p class="text-xs text-slate-200">"Semoga semua impian dan kebaikan yang Caca harapkan di usia baru ini bisa terwujud satu per satu. Stay happy & healthy selalu ya!"</p>
+            </div>
+        </section>
+
+        <!-- 3. PDKT SPARK METER -->
+        <section class="glass-card rounded-3xl p-8 text-center">
+            <h2 class="font-cursive text-3xl font-bold text-rose-300 mb-2">PDKT Spark Level Meter 📈✨</h2>
+            <p class="text-xs md:text-sm text-slate-300 mb-6">Coba geser slider ini untuk mengukur seberapa sering Caca bikin aku kepikiran!</p>
+
+            <div class="max-w-md mx-auto">
+                <input type="range" id="sparkSlider" min="0" max="100" value="40" oninput="updateSparkMeter(this.value)" class="w-full accent-rose-400 cursor-pointer h-3 bg-white/20 rounded-lg">
+                
+                <div class="mt-6 p-4 bg-white/10 rounded-2xl border border-white/10 flex items-center justify-between">
+                    <span class="text-xs md:text-sm font-medium text-slate-300">Tingkat Efek Caca:</span>
+                    <span id="sparkPercentage" class="font-bold text-xl md:text-2xl text-rose-400">40%</span>
+                </div>
+                
+                <p id="sparkFeedback" class="text-xs md:text-sm text-pink-300 mt-3 font-medium h-8 flex items-center justify-center">
+                    "Awalnya penasaran aja..."
+                </p>
+            </div>
+        </section>
+
+        <!-- 4. FLIPPABLE CARDS: THINGS I LIKE ABOUT YOU -->
+        <section id="reasons-section" class="py-2">
+            <div class="text-center mb-8">
+                <h2 class="font-cursive text-4xl font-bold text-rose-300">Hal yang Bikin Kagum Sama Caca ✨</h2>
+                <p class="text-xs md:text-sm text-slate-300 mt-1">Klik atau sentuh kartu untuk membaca pesan di baliknya</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="flip-card h-64 perspective-1000 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner relative w-full h-full rounded-2xl shadow-md border border-white/10">
+                        <div class="flip-card-front absolute w-full h-full bg-gradient-to-br from-rose-500/20 to-purple-500/20 backdrop-blur rounded-2xl p-6 flex flex-col items-center justify-center text-center">
+                            <div class="w-14 h-14 bg-rose-500/30 rounded-full flex items-center justify-center text-rose-300 text-2xl mb-3">
+                                😊
+                            </div>
+                            <h3 class="font-semibold text-white text-lg">Senyuman & Energinya</h3>
+                            <p class="text-[11px] text-rose-300 mt-2">Klik untuk membalik ➔</p>
+                        </div>
+                        <div class="flip-card-back absolute w-full h-full bg-slate-900/90 backdrop-blur rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-rose-400/30">
+                            <p class="text-xs md:text-sm text-slate-200 leading-relaxed">
+                                "Caca punya energi positif yang bikin orang di sekitarnya nyaman. Sekali senyum aja bisa bikin suasana langsung jadi beda!"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="flip-card h-64 perspective-1000 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner relative w-full h-full rounded-2xl shadow-md border border-white/10">
+                        <div class="flip-card-front absolute w-full h-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur rounded-2xl p-6 flex flex-col items-center justify-center text-center">
+                            <div class="w-14 h-14 bg-purple-500/30 rounded-full flex items-center justify-center text-purple-300 text-2xl mb-3">
+                                💬
+                            </div>
+                            <h3 class="font-semibold text-white text-lg">Cara Ceritanya</h3>
+                            <p class="text-[11px] text-purple-300 mt-2">Klik untuk membalik ➔</p>
+                        </div>
+                        <div class="flip-card-back absolute w-full h-full bg-slate-900/90 backdrop-blur rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-purple-400/30">
+                            <p class="text-xs md:text-sm text-slate-200 leading-relaxed">
+                                "Mengobrol dan dengar Caca cerita tentang hal-hal random selalu menyenangkan. Gak pernah berasa garing atau bosan."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="flip-card h-64 perspective-1000 cursor-pointer sm:col-span-2 md:col-span-1" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner relative w-full h-full rounded-2xl shadow-md border border-white/10">
+                        <div class="flip-card-front absolute w-full h-full bg-gradient-to-br from-pink-500/20 to-amber-500/20 backdrop-blur rounded-2xl p-6 flex flex-col items-center justify-center text-center">
+                            <div class="w-14 h-14 bg-amber-500/30 rounded-full flex items-center justify-center text-amber-300 text-2xl mb-3">
+                                🌸
+                            </div>
+                            <h3 class="font-semibold text-white text-lg">Kehangatan Karakter</h3>
+                            <p class="text-[11px] text-amber-300 mt-2">Klik untuk membalik ➔</p>
+                        </div>
+                        <div class="flip-card-back absolute w-full h-full bg-slate-900/90 backdrop-blur rounded-2xl p-6 flex flex-col items-center justify-center text-center border border-amber-400/30">
+                            <p class="text-xs md:text-sm text-slate-200 leading-relaxed">
+                                "Perhatian kecil dan respon manis dari Caca adalah alasan kenapa aku selalu antusias tiap kali kita komunikasi."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. SURPRISE GIFT BOX & PERSONAL NOTE -->
+        <section class="text-center py-6">
+            <button id="giftBtn" onclick="openGiftModal()" class="pulse-glow bg-gradient-to-r from-rose-500 via-pink-500 to-amber-500 text-white font-semibold text-base md:text-lg px-8 py-4 rounded-2xl shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center gap-3 mx-auto">
+                <i class="fas fa-gift text-2xl animate-bounce"></i>
+                Buka Pesan Ulang Tahun Spesial 💌
+            </button>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="text-center py-6 text-slate-400 text-xs">
+            Dibuat khusus untuk <strong>Caca</strong> ✨ | Selamat Ulang Tahun! 2 November 🎂
+        </footer>
+    </main>
+
+    <!-- SURPRISE MODAL -->
+    <div id="giftModal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-card bg-slate-900/95 rounded-3xl max-w-lg w-full p-6 md:p-8 relative shadow-2xl transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto border border-rose-400/30">
+            <button onclick="closeGiftModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl w-8 h-8 rounded-full flex items-center justify-center bg-white/10">
+                ✕
+            </button>
+
+            <div class="text-center mb-6">
+                <span class="text-4xl mb-2 block">🎁✨</span>
+                <h3 class="font-cursive text-3xl font-bold text-rose-300">Happy Birthday, Caca!</h3>
+                <p class="text-xs text-slate-400">Pesan singkat dari Iky di hari bahagiamu...</p>
+            </div>
+
+            <div class="text-slate-200 text-xs md:text-sm leading-relaxed space-y-4 font-light text-left bg-white/5 p-5 rounded-2xl border border-white/10 mb-6">
+                <p>Hai Caca,</p>
+                <p>Selamat ulang tahun ya! Di hari yang istimewa ini, aku cuma mau bilang kalau aku seneng banget bisa kenal dan ngobrol sama kamu sejauh ini.</p>
+                <p>Semoga di usiamu yang baru, Caca makin bahagia, selalu diberi kesehatan, dilancarkan semua urusannya, dan dikelilingi oleh hal-hal baik. Tetap jadi pribadi yang ceria dan menyenangkan seperti yang aku kenal ya!</p>
+                <p>Semoga ke depannya kita bisa makin dekat dan punya lebih banyak cerita seru bareng.</p>
+                <p class="text-right font-cursive text-xl font-bold text-rose-300 pt-2">Dari Iky ✨</p>
+            </div>
+
+            <!-- WhatsApp Direct Action Button -->
+            <a id="waReplyBtn" href="https://api.whatsapp.com/send?text=Makasih%20ya%20Iky%20buat%20websitenya,%20suka%20banget!%20🥹✨" target="_blank" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-xs md:text-sm">
+                <i class="fab fa-whatsapp text-lg"></i> Balas Pesan ke WhatsApp Iky 💬
+            </a>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Floating Heart Particles Generator
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const icons = ['✨', '💖', '🌸', '⭐', '💕'];
+            
+            for (let i = 0; i < 22; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'heart-particle';
+                particle.innerText = icons[Math.floor(Math.random() * icons.length)];
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                particle.style.animationDelay = (Math.random() * 5) + 's';
+                particle.style.fontSize = (Math.random() * 1.2 + 0.7) + 'rem';
+                container.appendChild(particle);
+            }
+        }
+        createHearts();
+
+        // Audio Ambient Synthesizer (Web Audio API)
+        let audioCtx;
+        let isPlaying = false;
+        let timerId;
+
+        function initAudio() {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        function playSoftMelody() {
+            if (!audioCtx) initAudio();
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const notes = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23]; // C E G C A F
+            let noteIdx = 0;
+
+            timerId = setInterval(() => {
+                if (!isPlaying) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(notes[noteIdx], audioCtx.currentTime);
+
+                gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 1.2);
+
+                noteIdx = (noteIdx + 1) % notes.length;
+            }, 650);
+        }
+
+        function toggleAudio() {
+            const statusText = document.getElementById('musicStatusText');
+            const musicIcon = document.getElementById('musicIcon');
+
+            if (!isPlaying) {
+                isPlaying = true;
+                playSoftMelody();
+                statusText.innerText = "Musik Diputar 🎶";
+                musicIcon.classList.add('animate-spin');
+            } else {
+                isPlaying = false;
+                clearInterval(timerId);
+                statusText.innerText = "Putar Musik 🎵";
+                musicIcon.classList.remove('animate-spin');
+            }
+        }
+
+        // Live Countdown Logic (Target: 2 November)
+        function startCountdown() {
+            const now = new Date();
+            let target = new Date(now.getFullYear(), 10, 2); // Nov is month index 10
+            
+            if (now > target && now.getDate() !== 2) {
+                target.setFullYear(target.getFullYear() + 1);
+            }
+
+            function update() {
+                const currentDate = new Date();
+                const diff = target - currentDate;
+
+                if (diff <= 0) {
+                    document.getElementById('days').innerText = "00";
+                    document.getElementById('hours').innerText = "00";
+                    document.getElementById('minutes').innerText = "00";
+                    document.getElementById('seconds').innerText = "00";
+                    return;
+                }
+
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const m = Math.floor((diff / 1000 / 60) % 60);
+                const s = Math.floor((diff / 1000) % 60);
+
+                document.getElementById('days').innerText = String(d).padStart(2, '0');
+                document.getElementById('hours').innerText = String(h).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+            }
+            update();
+            setInterval(update, 1000);
+        }
+        startCountdown();
+
+        // Candle Blowing Logic
+        let blownCandles = 0;
+        function extinguishCandle(candleEl) {
+            const flame = candleEl.querySelector('.flame');
+            if (flame && flame.style.display !== 'none') {
+                flame.style.display = 'none';
+                blownCandles++;
+                triggerConfetti();
+
+                if (blownCandles >= 3) {
+                    setTimeout(() => {
+                        const resultMsg = document.getElementById('wishResultMessage');
+                        resultMsg.classList.remove('hidden');
+                        triggerConfettiBig();
+                    }, 300);
+                }
+            }
+        }
+
+        // PDKT Spark Meter Slider Logic
+        function updateSparkMeter(val) {
+            const label = document.getElementById('sparkPercentage');
+            const feedback = document.getElementById('sparkFeedback');
+
+            if (val < 30) {
+                label.innerText = val + "%";
+                feedback.innerText = "Awal kenal: Penasaran sama sosok Caca 💫";
+            } else if (val < 60) {
+                label.innerText = val + "%";
+                feedback.innerText = "Sering bikin tersenyum pas dapet notif chat 😊";
+            } else if (val < 90) {
+                label.innerText = val + "%";
+                feedback.innerText = "Selalu kepikiran & bikin hari-hari makin seru 🥰";
+            } else {
+                label.innerText = "1000% Over Limit!";
+                feedback.innerText = "Caca udah bikin ketagihan ngobrol tiap hari! ✨🔥";
+                triggerConfetti();
+            }
+        }
+
+        // Confetti Triggers
+        function triggerConfetti() {
+            confetti({
+                particleCount: 40,
+                spread: 60,
+                origin: { y: 0.7 },
+                colors: ['#ffb6c1', '#ff69b4', '#e63946', '#ffd700']
+            });
+        }
+
+        function triggerConfettiBig() {
+            confetti({
+                particleCount: 120,
+                spread: 100,
+                origin: { y: 0.6 }
+            });
+        }
+
+        // Scroll Helper
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Surprise Gift Modal Controls
+        function openGiftModal() {
+            const modal = document.getElementById('giftModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.firstElementChild.classList.remove('scale-95');
+            modal.firstElementChild.classList.add('scale-100');
+            triggerConfettiBig();
+        }
+
+        function closeGiftModal() {
+            const modal = document.getElementById('giftModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.firstElementChild.classList.remove('scale-100');
+            modal.firstElementChild.classList.add('scale-95');
+        }
+    </script>
+</body>
+</html>
